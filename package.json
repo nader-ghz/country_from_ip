@@ -9,14 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@maxmind/geoip2-node": "^4.2.0",
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "geolite2": "^3.5.1",
     "maxmind": "^4.3.11",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3"
+  },
+  "geolite2": {
+    "license-key": "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",
+    "selected-dbs": [
+      "City",
+      "Country",
+      "ASN"
+    ]
   }
 }

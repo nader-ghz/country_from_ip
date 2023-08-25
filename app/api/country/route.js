@@ -3,7 +3,7 @@ import {WebServiceClient} from "@maxmind/geoip2-node";
 
 
 async function ParseUrl(req){
-    const parsedUrl = new URL(req.url, `https://${req.headers.host}`);
+    const parsedUrl = new URL(req.url, `https://${req.nextUrl.host}`);
     return  parsedUrl.searchParams.get('address');
 }
 export async function GET(req, res) {

@@ -22,12 +22,16 @@ export async function GET(req, res) {
         try {
             const country = await client.city(userIP)
             return NextResponse.json({
-                Location : country
+                Location : country,
+                Url : parsedUrl,
+                userIP : userIP
             })
         }catch (e){
              console.log('error')
             return NextResponse.json({
                 error :'IP_ADDRESS_INVALID',
+                Url : parsedUrl,
+                userIP : userIP
             })
         }
 

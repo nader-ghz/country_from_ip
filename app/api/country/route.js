@@ -7,11 +7,11 @@ async function ParseUrl(req){
 }
 export async function GET(req, res) {
 
-
+    const parsedUrl = new URL(req.nextUrl.href, `https://${req.nextUrl.host}`);
+    const userIP =   parsedUrl.searchParams.get('address');
+    console.log(parsedUrl)
     try {
-        const parsedUrl = new URL(req.nextUrl.href, `https://${req.nextUrl.host}`);
-        const userIP =   parsedUrl.searchParams.get('address');
-        console.log(parsedUrl)
+
         const license = process.env.MAXMIND_LICENSE_KEY ;
         const account_id = process.env.ACCOUNT_ID;
         const option = {
@@ -29,7 +29,7 @@ export async function GET(req, res) {
         }catch (e){
              console.log('error')
             return NextResponse.json({
-                error :'IP_ADDRESS_INVALID',
+                error :'IP_ADDRESS',
                 Url : parsedUrl,
                 userIP : userIP
             })

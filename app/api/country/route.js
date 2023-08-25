@@ -21,9 +21,7 @@ export async function GET(req, res) {
         // Get the user's IP address from the request context
         try {
             const country = await client.country(userIP)
-            console.log(country)
             return NextResponse.json({
-                Location :{
                     continent : {
                         code : country.continent.code,
                         name : country.continent.names.en
@@ -33,7 +31,6 @@ export async function GET(req, res) {
                         name: country.registeredCountry.names.en
                     },
                     traits : country.traits,
-                } ,
             })
         }catch (e){
              console.log('error')

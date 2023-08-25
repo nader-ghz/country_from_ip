@@ -1,12 +1,11 @@
 import {NextResponse} from "next/server";
-import maxmind from 'maxmind';
 import {WebServiceClient} from "@maxmind/geoip2-node";
 
 export async function GET(req, res) {
 
 
     try {
-        const parsedUrl = new URL(req.url, `https://${req.headers.host}`);
+        const parsedUrl = new URL(req.url, `https://${req.nextUrl.host}`);
         const userIP = parsedUrl.searchParams.get('address');
         const license = process.env.MAXMIND_LICENSE_KEY ;
         const account_id = process.env.ACCOUNT_ID;

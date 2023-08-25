@@ -3,15 +3,15 @@ import {WebServiceClient} from "@maxmind/geoip2-node";
 
 
 async function ParseUrl(req){
-    const parsedUrl = new URL(req.nextUrl.url, `https://${req.nextUrl.host}`);
-    return  parsedUrl.searchParams.get('address');
+
 }
 export async function GET(req, res) {
 
 
     try {
-        const userIP = await ParseUrl(req)
-         console.log(userIP)
+        const parsedUrl = new URL(req.nextUrl.href, `https://${req.nextUrl.host}`);
+        const userIP =   parsedUrl.searchParams.get('address');
+        console.log(parsedUrl)
         const license = process.env.MAXMIND_LICENSE_KEY ;
         const account_id = process.env.ACCOUNT_ID;
         const option = {

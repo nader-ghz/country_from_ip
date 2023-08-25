@@ -9,7 +9,7 @@ export async function GET(req, res) {
 
     const parsedUrl = new URL(req.nextUrl.href, `https://${req.nextUrl.host}`);
     const userIP =   parsedUrl.searchParams.get('address');
-    console.log(parsedUrl)
+    console.log(userIP)
     try {
 
         const license = process.env.MAXMIND_LICENSE_KEY ;
@@ -20,11 +20,20 @@ export async function GET(req, res) {
         const client = new WebServiceClient(account_id, license,option);
         // Get the user's IP address from the request context
         try {
-            const country = await client.city(userIP)
+            const country = await client.country(userIP)
+            console.log(country)
             return NextResponse.json({
-                Location : country,
-                Url : parsedUrl,
-                userIP : userIP
+                Location :{
+                    continent : {
+                        code : country.continent.code,
+                        name : country.continent.names.en
+                    },
+                    country : {
+                        code : country.registeredCountry.isoCode,
+                        name: country.registeredCountry.names.en
+                    },
+                    traits : country.traits,
+                } ,
             })
         }catch (e){
              console.log('error')
